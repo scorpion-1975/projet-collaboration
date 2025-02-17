@@ -6,9 +6,9 @@
           <li class="nav-item">
               <a class="nav-link collapsed" href="index.php">
                   <i class="bi bi-grid"></i>
-                  <span>Dashboard</span>
+                  <span>Tableau de bord</span>
               </a>
-          </li><!-- End Dashboard Nav -->
+          </li><!-- End Tableau de bord Nav -->
 
           <li class="nav-item">
               <a class="nav-link collapsed" data-bs-target="#projets-nav" data-bs-toggle="collapse" href="#">

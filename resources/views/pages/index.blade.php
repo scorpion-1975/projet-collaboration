@@ -3,18 +3,18 @@
 @section('content')
     <div class="pagetitle d-flex flrx-wrap justify-content-between ">
         <div>
-            <h1>Dashboard</h1>
+            <h1>Tableau de bord</h1>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-                    <li class="breadcrumb-item active">Dashboard</li>
+                    <li class="breadcrumb-item active">Tableau de bord</li>
                 </ol>
             </nav>
         </div>
 
         <div>
             @if (auth()->user()->roles->first()->name == 'admin')
-                <a href="#" class="btn btn-primary">
+                <a href="{{ route('projects.create') }}" class="btn btn-primary">
                     <i class="bi bi-plus"></i>
                     Ajouter un projet
                 </a>
