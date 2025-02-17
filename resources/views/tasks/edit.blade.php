@@ -62,9 +62,9 @@
                             </select>
                         </div>
 
-                        <div class="mb-3">
-                            <label for="file" class="form-label">Fichier</label>
-                            <input type="file" name="file" id="file" class="form-control">
+                        <div  class="mb-3">
+                            <label for="files">Ajouter des fichiers :</label>
+                            <input type="file" name="files[]" multiple class="form-control">
                         </div>
 
                         <button type="submit" class="btn btn-primary">Mettre à jour la tâche</button>

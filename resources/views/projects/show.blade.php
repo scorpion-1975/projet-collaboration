@@ -76,8 +76,8 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="file" class="form-label">Fichier</label>
-                                    <input type="file" name="file" id="file" class="form-control">
+                                    <label for="files">Ajouter des fichiers :</label>
+                                    <input type="file" name="files[]" multiple class="form-control">
                                 </div>
 
                                 <button type="submit" class="btn btn-primary">Ajouter Tâche</button>
@@ -133,7 +133,7 @@
                                 <tbody>
                                     @foreach ($project->tasks as $task)
                                         <tr>
-                                            <td>{{ $task->id }}</td>
+                                            <td>{{ $task->title }}</td>
                                             <td>{{ $task->description }}</td>
                                             <td>{{ $task->due_date ? \Carbon\Carbon::parse($task->due_date)->format('d/m/Y') : 'Non définie' }}
                                             </td>
@@ -147,9 +147,17 @@
                                                 </span>
                                             </td>
                                             <td>
+                                                <a class="btn btn-info btn-sm"
+                                                    href="{{ route('tasks.show', ['project' => $project->id, 'task' => $task->id]) }}">
+                                                     <i class="bi bi-eye"></i>
+                                                </a>
+
                                                 <!-- Actions (modifier, supprimer) -->
                                                 <a href="{{ route('tasks.edit', ['project' => $project->id, 'task' => $task->id]) }}"
-                                                    class="btn btn-warning btn-sm">Modifier</a>
+                                                    class="btn btn-warning btn-sm">
+                                                    <i class="bi bi-pen"></i>
+
+                                                </a>
 
 
                                                 <form
@@ -158,7 +166,9 @@
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger btn-sm"
-                                                        onclick="return confirm('Êtes-vous sûr ?')">Supprimer</button>
+                                                        onclick="return confirm('Êtes-vous sûr ?')">
+                                                    <i class="bi bi-trash"></i>
+                                                    </button>
                                                 </form>
                                             </td>
                                         </tr>
@@ -179,6 +189,7 @@
                                 <tr>
                                     <th>Nom</th>
                                     <th>Role</th>
+                                    <th>RoNombre tâche</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -186,7 +197,7 @@
                                     <tr>
                                         <td>{{ $user->username }}</td>
                                         <td>{{ $user->pivot->role }}</td>
-                                    </tr>
+                                        <td>{{ $user->tasksForUser($user->id)->count() }}</td>                                    </tr>
                                 @endforeach
 
                             </tbody>

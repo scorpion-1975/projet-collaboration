@@ -60,6 +60,14 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/projects/{project}/tasks/{task}', [TaskController::class, 'destroy'])->name('tasks.destroy');
     Route::post('/tasks/{task}/complete', [TaskController::class, 'markAsCompleted'])->name('tasks.complete');
 
+    Route::get('/projects/{project}/tasks/{task}', [TaskController::class, 'show'])->name('tasks.show');
+
+
+    Route::delete('/tasks/{task}/files/{file}', [TaskController::class, 'destroyFile'])->name('tasks.files.destroy');
+
+     Route::get('/projects/{project}/tasks/{task}/download/{file?}', [TaskController::class, 'download'])->name('tasks.download');
+
+
 });
 
 

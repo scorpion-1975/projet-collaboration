@@ -60,9 +60,20 @@ class User extends Authenticatable
         $this->roles()->attach($role);
     }
 
-     // Relation : Un utilisateur peut avoir plusieurs projets
-     public function projects()
-     {
-         return $this->belongsToMany(Project::class)->withPivot('role')->withTimestamps();
-     }
+    // Relation : Un utilisateur peut avoir plusieurs projets
+    public function projects()
+    {
+        return $this->belongsToMany(Project::class)->withPivot('role')->withTimestamps();
+    }
+
+    public function tasks()
+    {
+        return $this->hasMany(Task::class);
+    }
+
+
+    public function tasksForUser($userId)
+    {
+        return $this->tasks()->where('user_id', $userId);
+    }
 }
