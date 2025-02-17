@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\Rule;
 
 class AuthController extends Controller
 {
@@ -43,6 +44,19 @@ class AuthController extends Controller
             'username' => $request->username,
             'password' => Hash::make($request->password),
         ]);
+
+
+        // Vérifier si c'est le premier utilisateur inscrit
+        if (User::count() == 1) {
+            // Lui attribuer le rôle admin
+            $adminRole = Role::where('name', 'admin')->first();
+            $user->roles()->attach($adminRole);
+        } else {
+            // Sinon, lui attribuer le rôle membre
+            $memberRole = Role::where('name', 'membre')->first();
+            $user->roles()->attach($memberRole);
+        }
+
 
         // Redirection après l'inscription réussie (par exemple vers la page de connexion)
         return redirect()->route('login')->with('success', 'Your account has been created successfully!');

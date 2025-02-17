@@ -21,7 +21,7 @@
 
                         <img src="assets/img/default.jpeg" alt="Profile" class="rounded-circle">
                         <h2>{{ auth()->user()->name }}</h2>
-                        <h3>{{ auth()->user()->username }}</h3>
+                        <h3>{{ auth()->user()->roles->first()->name ?? 'Aucun rôle' }}</h3>
                         <div class="social-links mt-2">
                             <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
                             <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>

@@ -13,10 +13,17 @@
         </div>
 
         <div>
-            <a href="" class="btn btn-primary">
-                <i class="bi bi-plus"></i>
-                Ajouter un projet
-            </a>
+            @if (auth()->user()->roles->first()->name == 'admin')
+                <a href="#" class="btn btn-primary">
+                    <i class="bi bi-plus"></i>
+                    Ajouter un projet
+                </a>
+            @else
+                <a href="#" class="btn btn-primary">
+                    <i class="bi bi-plus"></i>
+                    Rejoindre un projet
+                </a>
+            @endif
         </div>
     </div><!-- End Page Title -->
 
