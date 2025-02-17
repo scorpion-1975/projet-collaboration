@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Project;
 use App\Models\Task;
+use App\Models\Project;
 use Illuminate\Http\Request;
+use App\Mail\TaskNotification;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
 class TaskController extends Controller
@@ -22,7 +24,7 @@ class TaskController extends Controller
         $filePath = $request->file('file') ? $request->file('file')->store('tasks') : null;
 
         // dd($filePath);
-        $project->tasks()->create([
+        $task = $project->tasks()->create([
             'title' => $request->title,
             'description' => $request->description,
             'due_date' => $request->due_date,
@@ -31,15 +33,23 @@ class TaskController extends Controller
             'user_id' => $request->user_id
         ]);
 
+         // Envoi d'un e-mail si la tâche est assignée
+         if ($request->user_id && $request->user_id != $task->user_id) {
+            $user = \App\Models\User::find($request->user_id);
+            if ($user) {
+                Mail::to($user->email)->send(new TaskNotification($task, "Une nouvelle tâche vous a été assignée."));
+            }
+        }
+
         return redirect()->back()->with('success', 'Tâche ajoutée avec succès.');
     }
 
     public function edit(Project $project, Task $task)
     {
-         // Vérifier si l'utilisateur est bien associé au projet
-    if (!$project->users->contains(auth()->user())) {
-        return redirect()->route('projects.index')->with('error', 'Vous n\'êtes pas autorisé à modifier cette tâche.');
-    }
+        // Vérifier si l'utilisateur est bien associé au projet
+        if (!$project->users->contains(auth()->user())) {
+            return redirect()->route('projects.index')->with('error', 'Vous n\'êtes pas autorisé à modifier cette tâche.');
+        }
 
         return view('tasks.edit', compact('task', 'project'));
     }
@@ -62,6 +72,14 @@ class TaskController extends Controller
         }
 
         $task->update($request->except(['file']));
+
+        // Envoi d'un e-mail si la tâche est assignée
+        if ($request->user_id && $request->user_id != $task->user_id) {
+            $user = \App\Models\User::find($request->user_id);
+            if ($user) {
+                Mail::to($user->email)->send(new TaskNotification($task, "Une nouvelle tâche vous a été assignée."));
+            }
+        }
 
         return redirect()->route('projects.show', $project)->with('success', 'Tâche mise à jour.');
     }
