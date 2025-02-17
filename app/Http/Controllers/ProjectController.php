@@ -17,10 +17,12 @@ class ProjectController extends Controller
         return view('projects.index', compact('projects'));
     }
 
-    public function show(Project $project)
+    public function show($id)
     {
+        $project = Project::with('tasks', 'users')->findOrFail($id); // Assurez-vous que les tâches et utilisateurs sont récupérés
         return view('projects.show', compact('project'));
     }
+
 
 
 
@@ -88,7 +90,7 @@ class ProjectController extends Controller
     // Changer le statut du projet
     public function updateStatus(Request $request, $projectId)
     {
- 
+
         $project = Project::findOrFail($projectId);
 
         // Validation du statut

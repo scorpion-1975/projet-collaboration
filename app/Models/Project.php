@@ -23,4 +23,9 @@ class Project extends Model
      {
          return $this->belongsToMany(User::class)->withPivot('role')->withTimestamps();
      }
+     // Relation : Un projet peut avoir plusieurs tache
+     public function tasks()
+     {
+         return $this->hasMany(Task::class);
+     }
 }

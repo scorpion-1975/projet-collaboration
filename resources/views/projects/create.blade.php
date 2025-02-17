@@ -15,7 +15,13 @@
                 </nav>
             </div>
 
-           
+            <div>
+                <a class="btn btn-info">
+                    <strong>Date début :</strong> {{ $project->start_date ?? 'Non définie' }}
+                    <br>
+                    <strong>Date limite :</strong> {{ $project->end_date ?? 'Non définie' }}
+                </a>
+            </div>
         </div><!-- End Page Title -->
 
         <section class="section dashboard">
