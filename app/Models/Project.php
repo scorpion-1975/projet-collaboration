@@ -17,4 +17,10 @@ class Project extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+     // Relation : Un projet peut avoir plusieurs utilisateurs
+     public function users()
+     {
+         return $this->belongsToMany(User::class)->withPivot('role')->withTimestamps();
+     }
 }

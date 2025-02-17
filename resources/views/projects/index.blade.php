@@ -55,7 +55,7 @@
                                     <td>
                                         <a href="{{ route('projects.show', $project->id) }}"
                                             class="btn btn-info btn-sm">Voir</a>
-                                        <a href="#" class="btn btn-warning btn-sm">Inviter</a>
+                                        <a href="{{ route('projects.invite', $project->id) }}" class="btn btn-warning btn-sm">Inviter</a>
                                     </td>
                                 </tr>
                             @endforeach

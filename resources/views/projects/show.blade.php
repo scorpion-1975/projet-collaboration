@@ -64,14 +64,36 @@
                             <thead>
                                 <tr>
                                     <th>Nom</th>
-                                    <th>Nbre de tâche</th>
-
+                                    <th>Role</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach ($project->users as $user)
+                                    <tr>
+                                        <td>{{ $user->username }}</td>
+                                        <td>{{ $user->pivot->role }}</td>
+                                    </tr>
+                                @endforeach
 
                             </tbody>
                         </table>
+                    </div>
+                    <div class="card mt-2 p-2">
+                        <form action="{{ route('projects.updateStatus', $project->id) }}" method="POST" class="d-inline">
+                            @csrf
+                            <label for="status">Changer le statut :</label>
+                            <select name="status" id="status" class="form-select mt-2 d-inline w-100" required>
+                                <option value="en cours" {{ $project->status == 'en cours' ? 'selected' : '' }}>En cours
+                                </option>
+                                <option value="terminé" {{ $project->status == 'terminé' ? 'selected' : '' }}>Terminé
+                                </option>
+                                <option value="en attente" {{ $project->status == 'en attente' ? 'selected' : '' }}>En
+                                    attente</option>
+                            </select>
+                            <button type="submit" class="btn btn-primary mt-2 w-100">Mettre à jour</button>
+                        </form>
+
+
                     </div>
                 </div>
             </div>

@@ -59,4 +59,10 @@ class User extends Authenticatable
         $role = Role::where('name', $roleName)->first();
         $this->roles()->attach($role);
     }
+
+     // Relation : Un utilisateur peut avoir plusieurs projets
+     public function projects()
+     {
+         return $this->belongsToMany(Project::class)->withPivot('role')->withTimestamps();
+     }
 }

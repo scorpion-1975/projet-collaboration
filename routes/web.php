@@ -32,12 +32,24 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
 Route::middleware(['auth'])->group(function () {
+
+    // Afficher les projets de l'utilisateur
+    Route::get('/projects', [ProjectController::class, 'index'])->name('projects.index');
+
+    // Créer un projet
     Route::get('/projects/create', [ProjectController::class, 'create'])->name('projects.create');
     Route::post('/projects/store', [ProjectController::class, 'store'])->name('projects.store');
-    Route::get('/projects', [ProjectController::class, 'index'])->name('projects.index');
+
+    // Afficher un projet spécifique
     Route::get('/projects/{project}', [ProjectController::class, 'show'])->name('projects.show');
 
+    // Inviter un utilisateur dans un projet
+    Route::get('/projects/{project}/invite', [ProjectController::class, 'showInviteForm'])->name('projects.invite');
+    Route::post('/projects/{project}/invite', [ProjectController::class, 'inviteUser'])->name('projects.invite.store');
 
+
+    // Modifier le statut du projet
+    Route::post('/projects/{project}/status', [ProjectController::class, 'updateStatus'])->name('projects.updateStatus');
 });
 
 
