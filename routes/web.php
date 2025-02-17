@@ -1,14 +1,13 @@
 <?php
 
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\FrontController;
 use App\Http\Controllers\ProjectController;
 
 
-Route::get('/', function () {
-    return view('pages.index');
-})->name('panel');
 
 
 // Route pour afficher le formulaire d'inscription
@@ -24,8 +23,6 @@ Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 // Route pour traiter la connexion
 Route::post('/login', [AuthController::class, 'login']);
 
-// Route pour traiter la connexion
-Route::get('/users-profile', [AuthController::class, 'profile'])->name('profile');
 
 // Routes d'authentification
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
@@ -33,6 +30,12 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
 Route::middleware(['auth'])->group(function () {
+
+    Route::get('/', [FrontController::class, 'index'])->name('panel');
+
+
+    // Route pour traiter la connexion
+    Route::get('/users-profile', [AuthController::class, 'profile'])->name('profile');
 
     // Afficher les projets de l'utilisateur
     Route::get('/projects', [ProjectController::class, 'index'])->name('projects.index');
@@ -65,9 +68,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::delete('/tasks/{task}/files/{file}', [TaskController::class, 'destroyFile'])->name('tasks.files.destroy');
 
-     Route::get('/projects/{project}/tasks/{task}/download/{file?}', [TaskController::class, 'download'])->name('tasks.download');
-
-
+    Route::get('/projects/{project}/tasks/{task}/download/{file?}', [TaskController::class, 'download'])->name('tasks.download');
 });
 
 

@@ -46,16 +46,11 @@ class AuthController extends Controller
         ]);
 
 
-        // Vérifier si c'est le premier utilisateur inscrit
-        if (User::count() == 1) {
-            // Lui attribuer le rôle admin
-            $adminRole = Role::where('name', 'admin')->first();
-            $user->roles()->attach($adminRole);
-        } else {
-            // Sinon, lui attribuer le rôle membre
+
+            // On attribue le rôle membre
             $memberRole = Role::where('name', 'membre')->first();
             $user->roles()->attach($memberRole);
-        }
+
 
 
         // Redirection après l'inscription réussie (par exemple vers la page de connexion)

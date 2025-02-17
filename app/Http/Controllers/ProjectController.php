@@ -28,13 +28,20 @@ class ProjectController extends Controller
 
     public function create()
     {
-
+        if ( auth()->check() && auth()->user()->roles->isNotEmpty() && auth()->user()->roles->first()->name != 'admin') {
+            abort(403, 'Unauthorized');
+        }
 
         return view('projects.create');
     }
 
     public function store(Request $request)
     {
+
+        if ( auth()->check() && auth()->user()->roles->isNotEmpty() && auth()->user()->roles->first()->name != 'admin') {
+            abort(403, 'Unauthorized');
+        }
+
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'string',

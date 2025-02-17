@@ -13,6 +13,10 @@ class Task extends Model implements HasMedia
 
     protected $guarded = ['id'];
 
+    protected $casts = [
+        'due_date' => 'date',
+    ];
+
     public function project()
     {
         return $this->belongsTo(Project::class);

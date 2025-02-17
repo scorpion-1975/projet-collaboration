@@ -10,44 +10,6 @@
               </a>
           </li><!-- End Tableau de bord Nav -->
 
-          <li class="nav-item">
-              <a class="nav-link collapsed" data-bs-target="#projets-nav" data-bs-toggle="collapse" href="#">
-                  <i class="bi bi-menu-button-wide"></i><span>projets</span><i class="bi bi-chevron-down ms-auto"></i>
-              </a>
-              <ul id="projets-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                  <li>
-                      <a href="projets-list-group.php">
-                          <i class="bi bi-circle"></i><span>List group</span>
-                      </a>
-                  </li>
-              </ul>
-          </li><!-- End projets Nav -->
-
-          <li class="nav-item">
-              <a class="nav-link collapsed" data-bs-target="#task-nav" data-bs-toggle="collapse" href="#">
-                  <i class="bi bi-menu-button-wide"></i><span>task</span><i class="bi bi-chevron-down ms-auto"></i>
-              </a>
-              <ul id="task-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                  <li>
-                      <a href="task-list-group.php">
-                          <i class="bi bi-circle"></i><span>List group</span>
-                      </a>
-                  </li>
-              </ul>
-          </li><!-- End task Nav -->
-
-          <li class="nav-item">
-              <a class="nav-link collapsed" data-bs-target="#users-nav" data-bs-toggle="collapse" href="#">
-                  <i class="bi bi-menu-button-wide"></i><span>users</span><i class="bi bi-chevron-down ms-auto"></i>
-              </a>
-              <ul id="users-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                  <li>
-                      <a href="users-list-group.php">
-                          <i class="bi bi-circle"></i><span>List group</span>
-                      </a>
-                  </li>
-              </ul>
-          </li><!-- End users Nav -->
 
 
 
@@ -61,9 +23,9 @@
           </li><!-- End Profile Page Nav -->
 
           <li class="nav-item">
-              <a class="nav-link collapsed" href="pages-faq.php">
+              <a class="nav-link collapsed" href="{{ route('projects.index') }}">
                   <i class="bi bi-question-circle"></i>
-                  <span>F.A.Q</span>
+                  <span>Projet</span>
               </a>
           </li><!-- End F.A.Q Page Nav -->
 
