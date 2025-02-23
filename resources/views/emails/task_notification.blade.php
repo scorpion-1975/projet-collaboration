@@ -7,7 +7,7 @@
     <h2>{{ $message }}</h2>
     <p><strong>Titre de la tâche :</strong> {{ $task->title }}</p>
     <p><strong>Description :</strong> {{ $task->description }}</p>
-    <p><strong>Échéance :</strong> {{ $task->due_date }}</p>
+    <p><strong>Échéance :</strong> <span style="color: red; font-weight:bold;">{{ $task->due_date }}</span></p>
 
     <p>Consultez votre tableau de bord pour plus de détails.</p>
 
